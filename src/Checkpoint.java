@@ -43,7 +43,7 @@ public class Checkpoint {
 	
 	void init(){
 		dx = location2.x-location1.x;
-		dy = location2.y-location2.y;
+		dy = location2.y-location1.y;
 		D = (dx*dx) + (dy*dy);
 	}
 	
@@ -77,12 +77,9 @@ public class Checkpoint {
 	    double py=location1.y+position*dy;
 	    	    
 	    PVector a = new PVector((float) px, (float) py);
-	   
 	    double distance1 = PVector.dist(location1, v.location);
 	    double distance2 = PVector.dist(location2, v.location);
 	    float dist = PVector.dist(a,v.location);
-	    //parent.noStroke();
-	    //parent.ellipse(middelpunt.x, middelpunt.y, dist,dist);
 	    if ((dist < (v.w/2) && distance < len) || distance1 < bolradius/2 || distance2 < bolradius/2) return true;
 		
 		return false;
