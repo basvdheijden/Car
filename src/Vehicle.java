@@ -1,5 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.core.PVector;
 
 public class Vehicle {
 	//variables
@@ -28,6 +29,8 @@ public class Vehicle {
 	float x = 0;
 	float y = 0;
 	
+	PVector location = new PVector();
+	
 	int score = 0;
 	
 	float terrain = (float) 0.99;
@@ -48,9 +51,9 @@ public class Vehicle {
 	void setSpeed(float speed_){
 		speed = speed_;
 	}
-	void setLocation(float x_, float y_){
-		x = x_;
-		y = y_;
+	void setLocation(PVector location_){
+		location.x = location_.x;
+		location.y = location_.y;
 	}
 	void setRotation(float _angle){
 		rot = _angle;
@@ -85,7 +88,7 @@ public class Vehicle {
 		  parent.noStroke();
 		  parent.fill(r,g,b);
 		  parent.pushMatrix();
-		  parent.translate(x,y);
+		  parent.translate(location.x,location.y);
 		  parent.rotate(rot);
 		  
 		  if (usingavatar){
@@ -102,8 +105,8 @@ public class Vehicle {
 	}
 	  
 	void updateLocation(){
-		x += Math.cos(rot) * speed;
-		y += Math.sin(rot) * speed;
+		location.x += Math.cos(rot) * speed;
+		location.y += Math.sin(rot) * speed;
 		
 		checkBounds();
 	}
@@ -113,10 +116,10 @@ public class Vehicle {
 	}
 	
 	void checkBounds(){
-		if (x < 0)x = parent.width;
-		if (x > parent.width)x = 0;
-		if (y > parent.height)y = 0;
-		if (y < 0)y = parent.height;
+		if (location.x < 0)location.x = parent.width;
+		if (location.x > parent.width)location.x = 0;
+		if (location.y > parent.height)location.y = 0;
+		if (location.y < 0)location.y = parent.height;
 	}
 	
 	//movement:
@@ -154,12 +157,12 @@ public class Vehicle {
 		parent.noFill();
 		parent.noStroke();
 		parent.fill(r,g,b,150);
-		parent.arc(x,y, h*2,h*2, 0, (float) currentCircle);
+		parent.arc(location.x,location.y, h*2,h*2, 0, (float) currentCircle);
 		
 		
 		parent.noFill();
 		parent.stroke(r,g,b,255);
-		parent.ellipse(x,y, h*2, h*2);
+		parent.ellipse(location.x,location.y, h*2, h*2);
 		parent.popMatrix();
 	}
 }

@@ -6,7 +6,7 @@ public class Bullet {
 	Turret turret;
 	Vehicle vehicle;
 	
-	float x,y;
+	PVector location = new PVector(0,0);
 	
 	int size = 10;
 	double speed = 1;
@@ -25,11 +25,9 @@ public class Bullet {
 		parent = p;
 		turret = t;
 		vehicle = v;
-		
-		x = t.x + (t.size/2);
-		y = t.y + (t.size/2);
-		x = t.x;
-		y = t.y;
+
+		location.x = t.location.x;
+		location.y = t.location.y;
 		
 		setColor(vehicle.r, vehicle.g, vehicle.b);
 	}
@@ -47,10 +45,10 @@ public class Bullet {
 	}
 	
 	void checkBounds(){
-		if (x < 0)x = parent.width;
-		if (x > parent.width)x = 0;
-		if (y > parent.height)y = 0;
-		if (y < 0)y = parent.height;		
+		if (location.x < 0)location.x = parent.width;
+		if (location.x > parent.width)location.x = 0;
+		if (location.y > parent.height)location.y = 0;
+		if (location.y < 0)location.y = parent.height;		
 	}
 	
 	void Draw(){
@@ -72,7 +70,7 @@ public class Bullet {
 		parent.fill(r,g,b, 150);
 		
 		parent.pushMatrix();
-		parent.translate(x,y);
+		parent.translate(location.x,location.y);
 		parent.rotate((float) angle);
 		parent.ellipse(0,0, size+10, size);
 
@@ -87,14 +85,14 @@ public class Bullet {
 	}
 	
 	void Fire(){
-		x = turret.x;
-		y = turret.y;
+		location.x = turret.location.x;
+		location.y = turret.location.y;
 		fired = true;
-		calcAngle();
+		angle = Math.random()*Math.PI;
 	}
 	
 	void calcAngle(){
-		double angle_ = Math.atan2(vehicle.y - y , vehicle.x - x);
+		double angle_ = Math.atan2(vehicle.location.y - location.y , vehicle.location.x - location.x);
 		angle = angle_;
 	}
 	
@@ -105,17 +103,14 @@ public class Bullet {
 	}
 	
 	void Move(){
-	   x += Math.cos(angle) * speed;
-	   y += Math.sin(angle) * speed; 
+		location.x += Math.cos(angle) * speed;
+		location.y += Math.sin(angle) * speed; 
 	}
 	
 	void checkCollision(){
-		PVector auto = new PVector(vehicle.x, vehicle.y);
-		PVector deze = new PVector(x,y);
-		
-		if (PVector.dist(auto, deze) < 10){
+		if (PVector.dist(vehicle.location, location) < 10){
 			vehicle.hit = true;
-			vehicle.setLocation(100, parent.random(0,parent.height));
+			vehicle.setLocation(new PVector(100, parent.random(0,parent.height)));
 			hit = true;
 		}
 	}

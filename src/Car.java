@@ -29,7 +29,7 @@ public class Car extends PApplet{
 		for(int i=0;i<autos.length;i++){
 			autos[i] = new Vehicle(this);
 			autos[i].setSpeed(1);
-			autos[i].setLocation(100, 100+100*i);
+			autos[i].setLocation(new PVector(100, 100+100*i));
 		}
 		
 		autos[0].setColor(255,0,0);
@@ -42,24 +42,18 @@ public class Car extends PApplet{
 		for(int i=0; i<autos.length;i++){
 			int size = 50;
 			turrets[i] = new Turret(this, autos[i], autos);
-			turrets[i].setLocation(random(width-100)+50,random(height-100)+50);
+			turrets[i].setLocation(new PVector(random(width-100)+50,random(height-100)+50));
 			turrets[i].setSize(size);
 			turrets[i].setBulletSpeed((float) 6);
 			turrets[i].makeBullets(30);
 		}
 		
 		for(int i=0;i<checkpoints.length;i++){
-			float randx = random(-60, 60);
-			float randy = random(-60, 60);
+			PVector rand = new PVector(random(-80,80), random(-80,80));
+			PVector cp1 = new PVector(random(150, width-150), random(150, height-150));
+			PVector cp2 = PVector.add(cp1,rand);
 			
-			if (randx < 0) randx -= 20; else randx += 20;
-			if (randy < 0) randy -= 20; else randy += 20;
-			
-			float cp1x = random(150, width-150);
-			float cp1y = random(150, height-150);
-			float cp2x = cp1x + randx;
-			float cp2y = cp1y + randy;
-			checkpoints[i] = new Checkpoint(this, autos, cp1x,cp1y, cp2x,cp2y);			
+			checkpoints[i] = new Checkpoint(this, autos, cp1, cp2);			
 		}
 	}
 	

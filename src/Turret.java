@@ -7,8 +7,8 @@ public class Turret {
 	Vehicle vehicle;
 	Vehicle[] vehicles;
 	
-	float x = 0;
-	float y = 0;
+	PVector location = new PVector();
+	
 	float bulletSpeed = 1;
 	int size = 5;
 	
@@ -34,9 +34,9 @@ public class Turret {
 		setColor(vehicle.r, vehicle.g, vehicle.b);
 	}
 	
-	void setLocation(float x_, float y_){
-		x = x_;
-		y = y_;
+	void setLocation(PVector location_){
+		location.x = location_.x;
+		location.y = location_.y;
 	}
 	void setSize(int size_){
 		size = size_;
@@ -67,7 +67,7 @@ public class Turret {
 		
 		parent.fill(r,g,b,50);
 		parent.noStroke();
-		parent.ellipse(x, y, (float) size, (float) size);
+		parent.ellipse(location.x, location.y, (float) size, (float) size);
 		
 		for(int i=0; i<bullets.length; i++){
 			if (!bullets[i].hit) bullets[i].Draw();
@@ -80,7 +80,7 @@ public class Turret {
 		parent.noFill();
 		parent.stroke(r,g,b);
 		parent.strokeWeight(5);
-		parent.arc(x,y, size,size, 0, (float) currentCircle);		
+		parent.arc(location.x,location.y, size,size, 0, (float) currentCircle);		
 		
 		if (currentCircle >= (float) Math.PI*2 && !empty){
 			currentCircle = startCircle;
@@ -99,10 +99,7 @@ public class Turret {
 	}
 	
 	public double getDistance(){
-		PVector a = new PVector(vehicle.x,vehicle.y);
-		PVector b = new PVector(x,y);
-		
-		return PVector.dist(a,b);
+		return PVector.dist(vehicle.location,location);
 	}
 	
 	void checkCollision(){
