@@ -34,8 +34,6 @@ public class Vehicle {
 	
 	boolean hit = false;
 	
-	Powerup.Properties[] powerups;
-	
 	//color
 	int r = 255;
 	int g = 255;
@@ -163,12 +161,5 @@ public class Vehicle {
 		parent.stroke(r,g,b,255);
 		parent.ellipse(x,y, h*2, h*2);
 		parent.popMatrix();
-	}	
-	
-	//powerups? vaag zooitje
-	void addPowerup(Powerup.Properties[] P_, int length){
-		for(int i=0;i<length;i++){
-			//powerups[i] = new Powerup.Properties(parent, this);
-		}
 	}
 }

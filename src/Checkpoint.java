@@ -14,8 +14,6 @@ public class Checkpoint {
 	int b = 30;
 	int alpha = 255;
 	
-	Obstakel cirkel = new Obstakel(parent, vehicles);
-	
 	boolean hit = false;
 	boolean target = false;
 	boolean dancing = false;
@@ -47,9 +45,6 @@ public class Checkpoint {
 		dx = x2-x1;
 		dy = y2-y1;
 		D = (dx*dx) + (dy*dy);
-		
-		cirkel.setLocation(parent.width/2, parent.height/2);
-		cirkel.setRadius(20);
 	}
 	
 	void setTarget(boolean target_){
@@ -134,13 +129,5 @@ public class Checkpoint {
 		parent.ellipse(x2,y2,bolradius,bolradius);
 		
 		if (hit && alpha > 40) alpha-=1;
-	}
-	
-	void drawObstakels(){
-		cirkel.calcDistance(new PVector(x1, y1));
-		
-		if (cirkel.stroke) parent.stroke(cirkel.r_stroke,cirkel.g_stroke,cirkel.b_stroke); else parent.noStroke();
-		if (cirkel.fill) parent.fill(cirkel.r,cirkel.g,cirkel.b); else parent.noFill();
-		parent.ellipse((float) cirkel.x, (float) cirkel.y, (float) cirkel.baseradius, (float) cirkel.baseradius);
 	}
 }

@@ -9,7 +9,6 @@ public class Car extends PApplet{
 	
 	Vehicle[] autos = new Vehicle[2];
 	Turret[] turrets;
-	Powerup[] powerups;
 	
 	PFont font;
 	
@@ -62,13 +61,6 @@ public class Car extends PApplet{
 			float cp2y = cp1y + randy;
 			checkpoints[i] = new Checkpoint(this, autos, cp1x,cp1y, cp2x,cp2y);			
 		}
-		
-		powerups = new Powerup[0];
-		for(int i=0;i<powerups.length;i++){
-			powerups[i] = new Powerup(this, autos);
-			powerups[i].setLocation(width/2,height/2);
-			powerups[i].setRadius(30);
-		}
 	}
 	
 	public void draw(){
@@ -99,10 +91,6 @@ public class Car extends PApplet{
 		
 		for(int i=0;i<checkpoints.length;i++){
 			checkpoints[i].Draw();
-		}
-		
-		for(int i=0;i<powerups.length;i++){
-			powerups[i].Draw();
 		}
 		
 		drawScore();
@@ -197,14 +185,6 @@ public class Car extends PApplet{
 			}
 			if (keyCode == 68){
 				autos[1].rotating = true; autos[1].rotatingdir = 1;
-			}
-			
-			if (keyCode == 16){
-				if (autos[0].powerups != null){
-					for(int i=0;i<autos[0].powerups.length;i++){
-						autos[0].powerups[i].Fire();
-					}
-				}
 			}
 			
 			if (key == CODED){
