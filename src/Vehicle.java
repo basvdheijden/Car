@@ -21,7 +21,7 @@ public class Vehicle {
 	
 	float startCircle = (float) Math.PI/40;
 	float currentCircle = (float) Math.PI/40;
-	float stepCircle = (float) Math.PI/90;
+	float stepCircle = (float) Math.PI/50;
 	
 	float w = 15;
 	float h = 25;
@@ -156,9 +156,8 @@ public class Vehicle {
 		parent.pushMatrix();
 		parent.noFill();
 		parent.noStroke();
-		parent.fill(r,g,b,150);
+		parent.fill(r,g,b,255);
 		parent.arc(location.x,location.y, h*2,h*2, 0, (float) currentCircle);
-		
 		
 		parent.noFill();
 		parent.stroke(r,g,b,255);

@@ -58,6 +58,19 @@ public class Checkpoint {
 	}
 	
 	boolean checkCollision(Vehicle v){
+		PVector middelpunt = new PVector();
+		middelpunt = PVector.sub(location2,location1);
+		middelpunt.div(2);
+		middelpunt.add(location1);
+		
+		float len = PVector.dist(location1, location2);
+		
+		float distance = PVector.dist(v.location, middelpunt);
+	
+		//debug
+		//if (distance < len)	parent.fill(255); else parent.fill(0);
+		//parent.ellipse(middelpunt.x, middelpunt.y, len,len);
+	
 		double position = ( (v.location.x-location1.x)*dx + (v.location.y-location1.y)*dy ) /D;
 		
 	    double px=location1.x+position*dx;
@@ -67,21 +80,10 @@ public class Checkpoint {
 	   
 	    double distance1 = PVector.dist(location1, v.location);
 	    double distance2 = PVector.dist(location2, v.location);
-	    float dist = PVector.dist(a,v.location)/20;
-	    
-	    if (distance1 < bolradius || distance2 < bolradius || (dist < 1 && 
-	    		(
-	    				(v.location.x > location1.x && v.location.x < location2.x && v.location.y > location1.y && v.location.y < location2.y)
-	    				||
-	    				(v.location.x < location1.x && v.location.x > location2.x && v.location.y > location1.y && v.location.y < location2.y)
-	    				||
-	    				(v.location.x < location1.x && v.location.x > location2.x && v.location.y < location1.y && v.location.y > location2.y)
-	    				||
-	    				(v.location.x > location1.x && v.location.x < location2.x && v.location.y < location1.y && v.location.y > location2.y)
-	    		))
-	    	){
-			return true;
-	    }
+	    float dist = PVector.dist(a,v.location);
+	    //parent.noStroke();
+	    //parent.ellipse(middelpunt.x, middelpunt.y, dist,dist);
+	    if ((dist < (v.w/2) && distance < len) || distance1 < bolradius/2 || distance2 < bolradius/2) return true;
 		
 		return false;
 	}
@@ -123,6 +125,6 @@ public class Checkpoint {
 		parent.ellipse(location1.x,location1.y,bolradius,bolradius);
 		parent.ellipse(location2.x,location2.y,bolradius,bolradius);
 		
-		if (hit && alpha > 40) alpha-=1;
+		if (hit && alpha > 20) alpha-=1;
 	}
 }
