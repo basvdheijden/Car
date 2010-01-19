@@ -11,14 +11,22 @@ public class CarGame extends PApplet{
 	
 	boolean gamestarted = false;
 	int numberofvehicles = 2;
-	int numberofcheckpoints = 30;
+	int numberofcheckpoints = 3;
 	
-	int cphit = 0;
+	int cphit;
 	Checkpoint[] checkpoints;
+	
+	public void resetGame(){
+		gamestarted = false;
+		frameCount = 0;
+		setup();	
+	}
 	
 	public void setup(){
 		smooth();
 		frameRate(30);
+		cphit = 0;
+		
 		size(screen.width,screen.height, P2D);
 		//size(1000,1000, P2D);
 		
@@ -126,7 +134,7 @@ public class CarGame extends PApplet{
 		}
 	}
 	
-	public void checkWinner(){		
+	public void checkWinner(){
 		int win0 = 0;
 		int win1 = 0;
 		
@@ -143,6 +151,10 @@ public class CarGame extends PApplet{
 			fill(255,255,255);
 		}
 		ellipse(width/2,height/2,500,500);
+		
+		fill(255,100,0);
+		textFont(font, 80);
+		text("Press 'R' to reset", width/4, height-100);
 	}
 	
 	public void drawScore(){
@@ -239,6 +251,9 @@ public class CarGame extends PApplet{
 					}
 				}
 			}
+		}
+		if (keyCode == 82){
+			resetGame();
 		}
 	}
 
