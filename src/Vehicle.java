@@ -17,6 +17,8 @@ public class Vehicle {
 	float rotatingdir = 1;
 	boolean rotating = false;
 	
+	boolean lulmode = false;
+	
 	double accelerationStep = 0.11;
 	
 	float startCircle = (float) Math.PI/40;
@@ -94,9 +96,21 @@ public class Vehicle {
 		  if (usingavatar){
 			  parent.image(avatar,-(avatar.width/2),-(avatar.height/2));
 		  }else{
-			  parent.ellipse(0, 0, h, w);
-			  parent.triangle(-2,  5, 15,  5, -20 - speed*2,  20 - speed/2);
-			  parent.triangle(-2, -5, 15, -5, -20 - speed*2, -20 + speed/2);
+			  if (lulmode){
+				  parent.ellipse(-10,-2, 20, 20);
+				  parent.rect(-30 - speed*3, -12, 20 + speed*3, 20);
+				  parent.ellipse(-30 - speed*3, -12, 17+speed, 17+speed);
+				  parent.ellipse(-30 - speed*3, 5, 17+speed, 17+speed);
+				  parent.stroke(0);
+				  parent.noFill();
+				  parent.strokeWeight(2);
+				  parent.line(-10,-2, 0, -2);
+			  }
+			  else{
+				  parent.ellipse(0, 0, h, w);
+				  parent.triangle(-2,  5, 15,  5, -20 - speed*2,  20 - speed/2);
+				  parent.triangle(-2, -5, 15, -5, -20 - speed*2, -20 + speed/2);
+			  }
 		  }
 		  parent.popMatrix();
 	  }else{

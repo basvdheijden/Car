@@ -34,7 +34,7 @@ public class CarGame extends PApplet{
 			autos[i].setLocation(new PVector(100, 100+100*i));
 		}
 		
-		autos[0].setColor(255,0,0);
+		autos[0].setColor(0,0,255);
 		autos[1].setColor(0,255,0);
 		
 		//autos[0].setAvatar("eend.png");
@@ -76,7 +76,7 @@ public class CarGame extends PApplet{
 		//println(red(backgroundImage.pixels[position]));
 		ellipse(width/2,height/2,100,100);
 		*/
-		background(20);
+		background(0);
 		
 		for(int i=0;i<turrets.length;i++){
 			turrets[i].Draw();	
@@ -95,7 +95,7 @@ public class CarGame extends PApplet{
 				checkpoints[cphit].setTarget(false);
 				cphit++;
 			}else{
-				checkpoints[cphit].setColor(255, 226, 0);
+				checkpoints[cphit].setColor(255, 0, 0);
 			}
 		}else{
 			gamestarted = false;
@@ -170,12 +170,12 @@ public class CarGame extends PApplet{
 				for(int score=0;score<autos[instance].score;score++){
 					noStroke();
 					fill(autos[instance].r, autos[instance].g, autos[instance].b, 100);
-					ellipse(x,height-75, 8,8);
-					ellipse(x,height-50, 8,8);
+					ellipse(x,height-40, 8,8);
+					ellipse(x,height-15, 8,8);
 					noFill();
 					stroke(autos[instance].r, autos[instance].g, autos[instance].b, 100);
 					strokeWeight(2);
-					line(x,height-75,x,height-50);
+					line(x,height-40,x,height-15);
 					x+=17;
 				}
 				
@@ -228,6 +228,16 @@ public class CarGame extends PApplet{
 			}
 			if (keyCode == 59){
 				autos[0].rotating = true; autos[0].rotatingdir = 1;
+			}
+			
+			if (keyCode == 32){
+				for(int i=0;i<autos.length;i++){
+					if (autos[i].lulmode){
+						autos[i].lulmode = false;
+					}else{
+						autos[i].lulmode = true;
+					}
+				}
 			}
 		}
 	}
