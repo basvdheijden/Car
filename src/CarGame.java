@@ -11,7 +11,7 @@ public class CarGame extends PApplet{
 	
 	boolean gamestarted = false;
 	int numberofvehicles = 2;
-	int numberofcheckpoints = 3;
+	int numberofcheckpoints = 30;
 	
 	int cphit;
 	Checkpoint[] checkpoints;
@@ -24,10 +24,10 @@ public class CarGame extends PApplet{
 	
 	public void setup(){
 		smooth();
-		frameRate(30);
+		frameRate(40);
 		cphit = 0;
 		
-		size(screen.width,screen.height, P2D);
+		size(screen.width,screen.height, JAVA2D);
 		//size(1000,1000, P2D);
 		
 		font = loadFont("berlin.vlw");
@@ -85,6 +85,12 @@ public class CarGame extends PApplet{
 		ellipse(width/2,height/2,100,100);
 		*/
 		background(0);
+		/*
+		fill(0,90);
+		noStroke();
+		rect(0,0, width,height);
+		*/
+		
 		
 		for(int i=0;i<turrets.length;i++){
 			turrets[i].Draw();	
@@ -142,7 +148,6 @@ public class CarGame extends PApplet{
 			if (autos[0] == checkpoints[i].dominator) win0++; else win1++;
 		}
 		
-		//println("PLAYER1:"+win0+",PLAYER2:"+win1);
 		if (win0 > win1){
 			fill(autos[0].r,autos[0].g,autos[0].b);
 		}else if (win1 > win0){

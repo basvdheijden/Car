@@ -67,10 +67,6 @@ public class Checkpoint {
 		
 		float distance = PVector.dist(v.location, middelpunt);
 	
-		//debug
-		//if (distance < len)	parent.fill(255); else parent.fill(0);
-		//parent.ellipse(middelpunt.x, middelpunt.y, len,len);
-	
 		double position = ( (v.location.x-location1.x)*dx + (v.location.y-location1.y)*dy ) /D;
 		
 	    double px=location1.x+position*dx;
